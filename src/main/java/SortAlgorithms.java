@@ -18,19 +18,12 @@ public class SortAlgorithms {
     }
     
     private void bubbleSortAsInVideo(){
-        for (int i = array.length - 1; i < 0; i--) {
+        for (int i = array.length - 1; i > 1; i--) {
             for (int j = 0; j < i; j++) {
                 if(array[j] > array[j+1])
                     swap(j, j+1);
             }
         }
-    }
-
-    private void swap(int indexOne, int indexTwo) {
-        int temp;
-        temp = array[indexOne];
-        array[indexOne] = array[indexTwo];
-        array[indexTwo] = temp;
     }
 
     private int binarySearchForValue(int value) {
@@ -53,6 +46,38 @@ public class SortAlgorithms {
         return result;
     }
 
+    private void selectionSort() {
+        for (int i = 0; i < array.length; i++) {
+            int min = i;
+            for (int j = i; j < array.length; j++) {
+                if (array[min] > array[j]) {
+                    min = j;
+                }
+            }
+            swap(i, min);
+        }
+    }
+
+    private void insertionSort() {
+        for (int i = 1; i < array.length; i++) {
+            int j = i;
+            int toInsert = array[i];
+
+            while ((j > 0) && (array[j-1]) > toInsert) {
+                array[j] = array[j-1];
+                j--;
+            }
+            array[j] = toInsert;
+        }
+    }
+
+    private void swap(int indexOne, int indexTwo) {
+        int temp;
+        temp = array[indexOne];
+        array[indexOne] = array[indexTwo];
+        array[indexTwo] = temp;
+    }
+
     private void printArray() {
         StringBuilder header = new StringBuilder();
         StringBuilder sbArray = new StringBuilder();
@@ -70,16 +95,35 @@ public class SortAlgorithms {
     public static void main(String[] args) {
         SortAlgorithms array = new SortAlgorithms();
         array.initializeRandomArray();
-        System.out.println("Initial array:");
+        System.out.println("---New random array---");
         array.printArray();
 
         array.bubbleSort();
         System.out.println("Result of bubble sort:");
         array.printArray();
+        System.out.println();
+        array.initializeRandomArray(); // create new random array for new sorting
+        System.out.println("---New random array---");
+        array.printArray();
         System.out.println("Result of bubble sort, method has been written as in video:");
         array.bubbleSortAsInVideo();
         array.printArray();
 
-        System.out.print("Result of binary search for value 99: " + array.binarySearchForValue(99));
+        System.out.println("\nResult of binary search for value 99: " + array.binarySearchForValue(99) + "\n");
+
+        array.initializeRandomArray(); //create new random array for new sorting
+        System.out.println("---New random array---");
+        array.printArray();
+        array.selectionSort();
+        System.out.println("Result of selection sort: ");
+        array.printArray();
+        System.out.println("");
+
+        array.initializeRandomArray(); //create new random array for new sorting
+        System.out.println("---New random array---");
+        array.printArray();
+        array.insertionSort();
+        System.out.println("Result of inserting sort: ");
+        array.printArray();
     }
 }

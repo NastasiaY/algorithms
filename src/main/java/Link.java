@@ -26,5 +26,58 @@ public class Link {
 }
 
 class LinkedList {
+    public Link firstLink;
 
+    LinkedList(Link firstLink) {
+        firstLink = null;
+    }
+    public boolean isEmpty() {
+        return firstLink == null;
+    }
+
+    public void removeFirst(){
+        if(!isEmpty()) {
+            firstLink = firstLink.next;
+        } else {
+            System.out.println("Empty LinkedList");
+        }
+    }
+
+    public void insertFirstLink(String bookName, int millionsSold) {
+        Link newLink = new Link(bookName, millionsSold);
+        newLink.next = firstLink;
+        firstLink = newLink;
+    }
+
+    public void display() {
+        Link link = firstLink;
+
+        while (firstLink != null) {
+            link.display();
+            System.out.println("The next Link: " + firstLink.next);
+            firstLink = firstLink.next;
+            System.out.println();
+        }
+    }
+
+    public Link findName(String bookName){
+        Link result = firstLink;
+
+        if(!isEmpty()){
+            while(!result.bookName.equals(bookName)){
+                if(firstLink.next == null) {
+                    return null;
+                } else {
+                    result = firstLink.next;
+                }
+            }
+        } else {
+            return null;
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+
+    }
 }

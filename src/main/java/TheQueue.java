@@ -21,6 +21,25 @@ public class TheQueue {
         }
     }
 
+    private void priorityInsert(String input) {
+        int i;
+
+        if(numberOfItems == 0) {
+            insert(input);
+        }
+
+        for (i = numberOfItems - 1; i > 0; i--) { //works only for integer array
+            if(Integer.parseInt(queueArray[i]) > Integer.parseInt(input)) {
+                queueArray[i+1] = queueArray[i];
+            } else break;
+        }
+
+        queueArray[i+1] = input;
+        rear++;
+        numberOfItems++;
+    }
+
+
     private void remove() {
         if(numberOfItems > 0) {
             front++;
@@ -47,6 +66,8 @@ public class TheQueue {
         System.out.println("Result of peek method: " + queue.peek());
         queue.insert("2");
         queue.insert("3");
+        queue.insert("5");
+        queue.priorityInsert("4");
         queue.displayTheQueue();
 
         queue.remove();

@@ -77,6 +77,25 @@ class LinkedList {
         return result;
     }
 
+    public void removeLink(String bookName){
+        Link currentLink = firstLink;
+        Link previousLink = firstLink;
+
+        while (!currentLink.bookName.equals(bookName)){
+            if (currentLink == null) {
+                return;
+            } else {
+                previousLink = currentLink;
+                currentLink = currentLink.next;
+            }
+        }
+
+        if(currentLink.bookName.equals(firstLink.bookName)){
+            firstLink = firstLink.next;
+        } else {
+            previousLink.next = currentLink.next;
+        }
+    }
     public static void main(String[] args) {
 
     }

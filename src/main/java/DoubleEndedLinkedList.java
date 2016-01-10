@@ -8,8 +8,9 @@ public class DoubleEndedLinkedList {
 
         if(isEmpty()) lastLink = newLink;
 
-        firstLink = newLink.next;
-        lastLink = newLink;
+        newLink.next = firstLink;
+        firstLink = newLink;
+
     }
 
     public void insertInLastPosition(String houseOwnerName, int houseNumber){
@@ -28,8 +29,7 @@ public class DoubleEndedLinkedList {
     }
 
     public void display(){
-         Neighbor tempLink = firstLink;
-
+        Neighbor tempLink = firstLink;
         if(tempLink == null) {
             System.out.println("Sorry, empty DoubleLinkedList");
         }
@@ -51,7 +51,7 @@ public class DoubleEndedLinkedList {
         linkedList.insertInFirstPosition("Harry", 5);
         linkedList.insertInFirstPosition("Ron", 8);
         linkedList.insertInLastPosition("Hermione", 1);
-        linkedList.insertInFirstPosition("Ron", 10 );
+        linkedList.insertInFirstPosition("Luna", 10);
 
         linkedList.display();
     }

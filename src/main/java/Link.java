@@ -1,6 +1,4 @@
-/**
- * Created by Anastasia on 07/01/16.
- */
+
 public class Link {
     public String bookName;
     public int millionsSold;
@@ -12,7 +10,7 @@ public class Link {
     }
 
     public void display(){
-        System.out.println(bookName + ": " + millionsSold + "000 000");
+        System.out.println(bookName + ": " + millionsSold + " 000 000");
     }
 
     @Override
@@ -21,6 +19,20 @@ public class Link {
     }
 
     public static void main(String[] args) {
+        LinkedList linkedList = new LinkedList();
+
+        linkedList.insertFirstLink("The Lord of the Rings", 150);
+        linkedList.insertFirstLink("Harry Potter and Half-Blood Prince", 500);
+        linkedList.insertFirstLink("It", 200);
+        linkedList.display();
+        linkedList.removeFirst();
+        System.out.println("---After remove method---\n");
+        linkedList.display();
+        System.out.println("Result of find method: " + linkedList.findName("Harry Potter and Half-Blood Prince"));
+        linkedList.removeLink("Harry Potter and Half-Blood Prince");
+        System.out.println("\n---After removeLink method, for Harry Potter---\n");
+        linkedList.display();
+
 
     }
 }
@@ -28,7 +40,7 @@ public class Link {
 class LinkedList {
     public Link firstLink;
 
-    LinkedList(Link firstLink) {
+    LinkedList() {
         firstLink = null;
     }
     public boolean isEmpty() {
@@ -39,7 +51,7 @@ class LinkedList {
         if(!isEmpty()) {
             firstLink = firstLink.next;
         } else {
-            System.out.println("Empty LinkedList");
+            System.out.println("Sorry, the LinkedList is empty");
         }
     }
 
@@ -52,10 +64,13 @@ class LinkedList {
     public void display() {
         Link link = firstLink;
 
-        while (firstLink != null) {
+        if(link == null) {
+            System.out.println("Sorry, empty LinkedList");
+        }
+        while (link != null) {
             link.display();
-            System.out.println("The next Link: " + firstLink.next);
-            firstLink = firstLink.next;
+            System.out.println("The next Link: " + link.next);
+            link = link.next;
             System.out.println();
         }
     }
@@ -63,16 +78,20 @@ class LinkedList {
     public Link findName(String bookName){
         Link result = firstLink;
 
-        if(!isEmpty()){
-            while(!result.bookName.equals(bookName)){
-                if(firstLink.next == null) {
-                    return null;
-                } else {
-                    result = firstLink.next;
-                }
-            }
-        } else {
+        if (isEmpty()){
+            System.out.println("Sorry, the LinkedList is empty");
             return null;
+        }
+
+        while (result != null) {
+            if(result.bookName.equals(bookName)) return result;
+
+            if(result.next != null) {
+                result = result.next;
+            } else {
+                result = null;
+                System.out.println("There is no such book in the LinkedList");
+            }
         }
         return result;
     }
@@ -95,8 +114,5 @@ class LinkedList {
         } else {
             previousLink.next = currentLink.next;
         }
-    }
-    public static void main(String[] args) {
-
     }
 }

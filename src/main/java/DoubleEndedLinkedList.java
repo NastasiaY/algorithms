@@ -93,19 +93,26 @@ public class DoubleEndedLinkedList {
     public static void main(String[] args) {
         DoubleEndedLinkedList linkedList = new DoubleEndedLinkedList();
 
-//        linkedList.insertInFirstPosition("Harry", 5);
-//        linkedList.insertInFirstPosition("Ron", 8);
-//        linkedList.insertInLastPosition("Hermione", 1);
-//        linkedList.insertInFirstPosition("Luna", 10);
 
         linkedList.insertInOrder("Harry", 5);
         linkedList.insertInOrder("Ron", 8);
         linkedList.insertInOrder("Hermione", 1);
-        linkedList.insertInOrder( "Luna", 10);
+        linkedList.insertInOrder("Luna", 10);
 
         linkedList.insertAfterKey("Me", 6, 1);
 
+        NeighborIterator iterator = new NeighborIterator(linkedList);
+
         linkedList.display();
+
+        System.out.println("---After remove method---");
+
+        iterator.remove();
+
+        linkedList.display();
+
+
+
     }
 
 }
@@ -131,3 +138,40 @@ class Neighbor {
     }
 }
 
+class NeighborIterator {
+    Neighbor currentNeighbor;
+    Neighbor previousNeighbor;
+
+    DoubleEndedLinkedList neighbors;
+
+    public NeighborIterator(DoubleEndedLinkedList neighbors) {
+        this.currentNeighbor = neighbors.firstLink ;
+        this.previousNeighbor = neighbors.lastLink;
+        this.neighbors = neighbors;
+    }
+
+    public boolean hasNext(){
+        return currentNeighbor.next != null;
+    }
+
+    public Neighbor next(){
+        if(hasNext()) {
+            previousNeighbor = currentNeighbor;
+            currentNeighbor = currentNeighbor.next;
+            return currentNeighbor;
+        }
+        return null;
+    }
+
+    public void remove(){
+        if(currentNeighbor == null) {
+            System.out.println("Sorry, the list is empty");
+        } else {
+            if(currentNeighbor == previousNeighbor) { //Is we have only one row
+                neighbors.firstLink = null;
+            } else {
+                neighbors.firstLink = neighbors.firstLink.next;
+            }
+        }
+    }
+}

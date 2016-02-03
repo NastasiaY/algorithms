@@ -31,6 +31,21 @@ public class BigONotation {
         return index;
     }
 
+    private void bubbleSort(int[] array) { // O(n2) in worth case
+        for (int i = array.length - 1; i >  1; i--) {
+            for (int j = 0; j < i; j++) {
+                if(array[j] > array[j+1])
+                    swap (j, j+1);
+            }
+        }
+    }
+
+    private void swap(int indexOne, int indexTwo) {
+        int temp = array[indexOne];
+        array[indexOne] = array[indexTwo];
+        array[indexTwo] = temp;
+    }
+
     public static void main(String[] args) {
         BigONotation testArray1 = new BigONotation(1000000);
         testArray1.generateRandomNumbers();
